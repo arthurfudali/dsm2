@@ -68,3 +68,34 @@ function parImpar(n) {
 let n = 12;
 console.log(`O numero ${n} é ${parImpar(n)}`);
 
+//funcao anonima -> util para não precisar ficar nomeando toda funcao
+// so funciona dentro de uma variavel
+
+const dobro = function (x) {
+  return x * 2;
+};
+console.log(`O dobro do numero é: ${dobro(15)}`);
+
+//arrow function -    > um tipo de função anonima
+// no lugar da palavra 'function' se usa uma '=>'
+const Dobro = (x) => {
+  return x * 2;
+};
+console.log(`O dobro do numero é: ${Dobro(23)}`);
+
+const adicao = (x, y) => {
+  return x + y;
+};
+const calculadora = (n1, operador, n2) => {
+  return eval(`${n1} ${operador} ${n2}`); //o eval pega 2 numeros e um operador e faz uma conta
+};
+console.log(`O resultado da operalçao é: ${calculadora(6, "*", 2)}`);
+
+//funcao imediata - IIFE (Imediately Invoked Function Expression)
+const iife = (function () {
+  console.log("Executando imediatamente! ");
+})(); //parametros vêm depois
+//IIFE com parametros
+const start = (function (app) {
+  console.log(`Executando imediatamente o app ${app}`);
+})("Whatsapp");
