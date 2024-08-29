@@ -115,3 +115,4 @@ productList.forEach((product) => {
   console.log(product.price);
   console.log("");
 });
+
