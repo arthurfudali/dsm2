@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1724975730 source:c:\users\fatec-dsm2\documents\dsm2\ed\c\listarevisao\ex7\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+
