@@ -87,7 +87,7 @@ begin
     select estoque into estoqueAtual from livros where idLivro = id limit 1;
     set estoqueAtualizado = estoqueAtual-qtd;
     return estoqueAtualizado;
-end
+end //
 
 delimiter ;
 
@@ -111,4 +111,17 @@ delimiter ;
 select * from vendas;
 #executar procedure
 call registraVenda(3,2);
+delimiter //
+create procedure atualizaEstoque(in id int, in qtd int)
+begin
+	declare estoqueNovo int;
+    set estoqueNovo = calculaEstoque(id, qtd);
+	update livros set estoque = estoqueNovo where idLivro = id;
+
+end //
+delimiter ;
+use sistemavendalivros;
+select * from livros;
+call atualizaEstoque(1,2);
+
 

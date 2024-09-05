@@ -10,14 +10,30 @@ app.get("/", (req, res) => {
 
 // Rota perfil
 // :nome é um parametro obrigatorio
-app.get("/perfil/:nome", (req, res) => {
+// para o parametro se tornar opcional é só adicionar uma ? no final
+app.get("/perfil/:nome?", (req, res) => {
   const nome = req.params.nome;
-  res.send("Perfil do usuário: " + nome);
+  //verifica se o nome existe
+  if (nome) {
+    res.send("Perfil do usuário: " + nome);
+  } else {
+    res.send("Faca login para acessar seu perfil!");
+  }
 });
 
 // Rota de video
-app.get("/videos", (req, res) => {
-  res.send("Pagina de Videos:");
+app.get("/videos/:playlist?/:video?", (req, res) => {
+  const playlist = req.params.playlist;
+  const video = req.params.video;
+  if (playlist && video == undefined) {
+    res.send("Pagina de Videos:" + playlist);
+  }
+  if (playlist && video) {
+    res.send("Voce esta na playlist: " + playlist + " e no video: " + video);
+  }
+  else{
+    res.send("Pagina de videos")
+  }
 });
 
 // Iniciando o servidor na porta 8080
