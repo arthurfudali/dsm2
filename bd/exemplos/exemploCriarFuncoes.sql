@@ -117,11 +117,34 @@ begin
 	declare estoqueNovo int;
     set estoqueNovo = calculaEstoque(id, qtd);
 	update livros set estoque = estoqueNovo where idLivro = id;
-
 end //
 delimiter ;
 use sistemavendalivros;
 select * from livros;
-call atualizaEstoque(1,2);
+call atualizaEstoque(1,1);
 
+delimiter //
+
+# criar trigger
+create trigger vender
+after insert on vendas 
+for each row
+begin
+
+	call atualizaEstoque(new.idLivro, new.quantidade);
+
+end//
+
+delimiter ;
+
+select * from livros;
+select * from vendas;
+
+call registraVenda(1,8);
+
+# criar VIEW de listagem de vendas
+# a VIEW é um 'apelido' para uma query;
+
+create view listaVendas as select idVenda, vendas.idLivro, livros.titulo, quantidade, valorTotal from vendas join livros on vendas.idLivro = livros.idLivro; #join e inner join funcionam igual
+select * from listaVendas;
 
