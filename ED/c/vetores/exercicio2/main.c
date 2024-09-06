@@ -19,9 +19,5 @@ int main()
         printf("A soma dos elementos na posicao %d e: %d \n", i+1, soma);
     }
 
-
-
-
-
     return 0;
 }
