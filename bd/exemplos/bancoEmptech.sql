@@ -69,7 +69,7 @@ insert into indicacoes (idindicador, idindicado) values
 
 # SELF JOIN
 # Gera um relacionamento de dados de uma tabela com ela mesma
-
-select i1.idIndicador as 'id indicador', f1.nomefunc as 'nome indicador', i1.idIndicado as 'id indicado', f2.nomefunc as 'nome indicado' from indicacoes i1 
+select i1.idIndicador as 'id indicador', f1.nomefunc as 'nome indicador', i1.idIndicado as 'id indicado', f2.nomefunc 
+as 'nome indicado' from indicacoes i1 
 join funcionarios f1 on i1.idindicador = f1.idfunc
 join funcionarios f2 on i1.idindicado = f2.idfunc;
