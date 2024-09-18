@@ -154,4 +154,40 @@ end //
 delimiter ;
 call addVenda('teste');
 select * from atuacaovendas;
-delete from atuacaovendas where codatuacao =10;
+delete from atuacaovendas where codatuacao =11;
+
+# Crie um gatilho chamado `BeforeInsertIndicacao` que verifica se o funcionário indicado já foi indicado por outro funcionário. Se o funcionário já tiver uma indicação, o gatilho deve lançar um erro e impedir a inserção.
+
+DELIMITER //
+
+CREATE TRIGGER VerificarIndicacaoAntesInsercao
+BEFORE INSERT ON indicacoes
+FOR EACH ROW
+BEGIN
+    IF exists 
+    (select 1 from indicacoes where codIndicado = new.codIndicado)
+    THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'O funcionário indicado já possui uma indicação anterior.';
+    END IF;
+END //
+
+DELIMITER ;
+
+select * from indicacoes;
+insert into indicacoes (codIndicador, codIndicado) values (3,2);
+
+# 3a
+alter table funcionarios add column codAtuacao int;
+select * from atuacaovendas;
+select * from funcionarios;
+insert into funcionarios (codAtuacao) values 
+(1),
+(2),
+(3),
+(4),
+(5),
+(6),
+(7),
+(8),
+(9)

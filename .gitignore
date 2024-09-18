@@ -223,3 +223,5 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+/TPI/projetoConexaoBD/nbproject/private/
+/TPI/projetoConexaoBD/build/

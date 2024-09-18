@@ -111,6 +111,7 @@ delimiter ;
 select * from vendas;
 #executar procedure
 call registraVenda(3,2);
+
 delimiter //
 create procedure atualizaEstoque(in id int, in qtd int)
 begin
