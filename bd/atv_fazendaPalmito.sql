@@ -162,3 +162,36 @@ select * from palmito where id_palmito = 1;
 call atualizaEstoque (1, 10);
 
 #c. Atualizar o estoque automaticamente ao inserir uma nova compra
+delimiter //
+
+create function calculaEstoqueCompra (id int, qtd int) returns int
+begin
+declare estoqueAtual int;
+declare estoqueAtualizado int;
+select estoque_atual into estoqueAtual from palmito where id_palmito = id;
+set estoqueAtualizado = estoqueAtual + qtd;
+return ifnull(estoqueAtualizado, 0);
+end //
+
+create procedure registraCompra(in id_palmito int, in qtd int)
+begin
+declare valorTotal decimal(10,2);
+set valorTotal = calculaValorTotal(id_palmito, qtd);
+insert into compra (id_palmito, quantidade_comprada, data_compra, preco_total)
+values
+(id_palmito, qtd, curdate(), valorTotal);
+end //
+create procedure atualizaEstoqueCompra (in id_palmito int, in qtd int)
+begin
+declare estoqueNovo int;
+set estoqueNovo = calculaEstoqueCompra (id_palmito, qtd);
+update palmito set estoque_atual = estoqueNovo where palmito.id_palmito = id_palmito;
+end //
+create trigger comprar after insert on compra
+for each row
+begin
+	call atualizaEstoqueCompra(new.id_palmito, new.quantidade_comprada);
+end //
+delimiter ;
+call registraCompra (1, 20);
+select * from palmito where id_palmito = 1;
