@@ -21,6 +21,7 @@ codFunc int
 insert into funcionarios(nomeFunc) values
 ('João Silva'), ('Maria Oliveira'), ('Pedro Santos'),
 ('Ana Costa'),('Lucas Almeida'),('Fernana Lima'),('Arthur Fudali'),('Amanda Costa'),('Lucas Miura');
+drop table funcionarios;
 
 insert into veiculos (Modelo, Placas, codFunc) values
 ('Fiat Uno','ABC1D23',1),('Honda Civic','XYZ2E34',1),
@@ -83,22 +84,17 @@ select * from func_veic;
 create table atuacaoVendas
 (
 codAtuacao int auto_increment primary key,
-descricao varchar(255) not null
+descricao varchar(255) not null,
+codFunc int,
+foreign key (codFunc) references funcionarios(codFunc)
 );
+drop table atuacaovendas;
 
-insert into atuacaoVendas (descricao) values
-('Vendas de Veiculos Novos'), ('Vendas de Veiculos Usados'),
-('Manutenção e reparo de veiculos'),('Serviços de Pós-Vendas'),
-('Consultoria de Vendas'),('Programações e eventos especiais'),('Fincanciamento de veiculos'), ('Adicao de seguro'), ('Vendas de veiculos recuperados');
+insert into atuacaoVendas (descricao, codFunc) values
+('Vendas de Veiculos Novos', 1), ('Vendas de Veiculos Usados', 2),
+('Manutenção e reparo de veiculos', 3),('Serviços de Pós-Vendas', 4),
+('Consultoria de Vendas', 5),('Programações e eventos especiais', 6),('Fincanciamento de veiculos', 7), ('Adicao de seguro', 8), ('Vendas de veiculos recuperados', 9);
 
-#Cross Join
-/*Este join ira criar relatorio onde irá fazer todas as combinações
-possíveis entre as tabelas.
-Ex.: Se cruzarmos as Tabelas Funcionario, Veiculos e AtuacaoVendas
-onde teremos Tabela Funcionarios com 6 Registros, Tabela Veiculos
-com 7 registros e Tabela AutuacaoVendas com 6 Registros, iremos um 
-resultado de combinação 6 x 7 x 6 que totalizará 252 cobinações.
-*/
 
 select f.codFunc, f.nomeFunc, v.Modelo, v.Placas, a.descricao
 from funcionarios f
@@ -116,10 +112,6 @@ foreign key (codIndicado) references Funcionarios(codFunc)
 
 insert into indicacoes (codIndicador,codIndicado) values
 (1,2),(1,3),(2,4),(2,5),(4,6),(6,7),(7,8),(8,9);
-
-#Self Join
-/*Gera um resultado de relacionamento de dados de uma tabela com ela 
-mesma, ou seja, um auto-relacionamento. */
 
 select i1.codIndicador as 'ID Indicador', f1.nomeFunc as 'Nome Indicador',
 i1.codIndicado as 'ID Indicado', f2.nomeFunc as 'Nome Indicado' from indicacoes i1
@@ -177,17 +169,17 @@ DELIMITER ;
 select * from indicacoes;
 insert into indicacoes (codIndicador, codIndicado) values (3,2);
 
-# 3a
-alter table funcionarios add column codAtuacao int;
-select * from atuacaovendas;
+#3) 
+
+select * from atuacaoVendas;
 select * from funcionarios;
-insert into funcionarios (codAtuacao) values 
-(1),
-(2),
-(3),
-(4),
-(5),
-(6),
-(7),
-(8),
-(9)
+select * from veiculos;
+
+
+create view funcionarioVeiculoAtuacao as select f.codFunc, f.nomeFunc ,v.modelo, v.placas, d.descricao from funcionarios f 
+join veiculos v  on f.codFunc = v.codFunc inner join atuacaoVendas d where f.codFunc = d.codFunc; 
+select * from funcionarioVeiculoAtuacao;
+
+#b) 
+
+select f.nomeFunc ,v.modelo, d.descricao from funcionarios f left join veiculos v  on f.codFunc = v.codFunc left join atuacaoVendas d on f.codFunc = d.codFunc; 
