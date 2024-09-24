@@ -195,3 +195,18 @@ end //
 delimiter ;
 call registraCompra (1, 20);
 select * from palmito where id_palmito = 1;
+
+# 3. Criação de Views:
+#a. Mostrar a situação atual do estoque.
+create view  situacaoEstoque as select id_palmito "ID", tipo_palmito "Tipo Palmito", estoque_atual "Estoque" from palmito;
+select * from situacaoEstoque;
+
+#b. Exibir o histórico de vendas por tipo de palmito.
+create view historicoVendas as select id_venda "ID", palmito.tipo_palmito "Tipo palmito", quantidade_vendida "Quantidade vendida", data_venda "Data da venda", palmito.preco_venda "Preco Unitario" ,preco_total "Preco Total" 
+from venda join palmito 
+using(id_palmito)
+order by tipo_palmito;
+
+drop view historicoVendas;
+select * from historicoVendas;
+select * from venda;
