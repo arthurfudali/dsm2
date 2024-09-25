@@ -25,6 +25,7 @@ public class FUsuario extends javax.swing.JFrame {
         initComponents();
         consultar();
     } 
+    
     public void consultar(){
          ResultSet tabela;
     tabela = null;

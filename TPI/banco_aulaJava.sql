@@ -18,3 +18,10 @@ CREATE TABLE `Usuario` (
   PRIMARY KEY (`id`)
 );
 select * from usuario;
+create table Produtos(
+id int auto_increment primary key,
+codigo int(5) not null,
+nomeProduto varchar(100),
+descricao varchar(200)
+);
+select * from produtos;
