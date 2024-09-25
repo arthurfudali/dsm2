@@ -67,8 +67,8 @@ public class Usuario {
     
     public void cadastrarUsuario(){
         String sql = "INSERT INTO Usuario(nome, email, login, senha) VALUES"+
-                "(" + 
-                getNome()+ ", '" + getEmail() + "', '" + getLogin()+ "', '" + getSenha()+ "') ";
+                "( '" + 
+                getNome()+ "' , '" + getEmail() + "', '" + getLogin()+ "', '" + getSenha()+ "') ";
         con.executeSQL(sql);
         JOptionPane.showMessageDialog(null, "Registro salvo com sucesso");
     }
