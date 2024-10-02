@@ -25,3 +25,14 @@ nomeProduto varchar(100),
 descricao varchar(200)
 );
 select * from produtos;
+
+create database javaCrud;
+use javaCrud;
+create table usuario(
+	id int primary key auto_increment,
+    codigo int(4) not null,
+    nome varchar(100),
+    telefone varchar(16),
+    login varchar(60),
+    senha varchar(50)
+);
