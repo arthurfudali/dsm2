@@ -31,7 +31,7 @@ public class FrmUsuario extends javax.swing.JFrame {
         modelo.setNumRows(0);
         try {
             do {
-                modelo.addRow(new String[]{tabela.getString(1), tabela.getString(2), tabela.getString(3), tabela.getString(4), tabela.getString(5)});
+                modelo.addRow(new String[]{tabela.getString(2), tabela.getString(3), tabela.getString(4), tabela.getString(5), tabela.getString(6)});
             } while (tabela.next());
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro ao preencher tabela" + erro);
@@ -242,6 +242,11 @@ public class FrmUsuario extends javax.swing.JFrame {
                 "Código", "Nome", "Telefone", "Login", "Senha"
             }
         ));
+        JtblUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JtblUsuariosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(JtblUsuarios);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -289,7 +294,7 @@ public class FrmUsuario extends javax.swing.JFrame {
         txtLogin.setText("");
         txtSenha.setText("");
         txtNome.setText("");
-        
+
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
@@ -327,6 +332,19 @@ public class FrmUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_btnSairActionPerformed
+
+    private void JtblUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JtblUsuariosMouseClicked
+        // TODO add your handling code here:
+        //para pegar o numero da linha selecionada na tabela  
+        int linhaSelecionada = JtblUsuarios.getSelectedRow();
+
+        //mostra as informações da linha selecionada na tabela na caixa de texto
+        txtCodigo.setText(JtblUsuarios.getValueAt(linhaSelecionada, 0).toString());
+        txtNome.setText(JtblUsuarios.getValueAt(linhaSelecionada, 1).toString());
+        txtTelefone.setText(JtblUsuarios.getValueAt(linhaSelecionada, 2).toString());
+        txtSenha.setText(JtblUsuarios.getValueAt(linhaSelecionada, 3).toString());
+        txtLogin.setText(JtblUsuarios.getValueAt(linhaSelecionada, 4).toString());
+    }//GEN-LAST:event_JtblUsuariosMouseClicked
 
     /**
      * @param args the command line arguments
