@@ -99,3 +99,4 @@ const iife = (function () {
 const start = (function (app) {
   console.log(`Executando imediatamente o app ${app}`);
 })("Whatsapp");
+

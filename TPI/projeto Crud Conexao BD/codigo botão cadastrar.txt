@@ -1,0 +1,22 @@
+        usu.setNome(txtNome.getText());
+        usu.setTelefone(txtTelefone.getText());
+        usu.setSenha(txtSenha.getText());
+        usu.setLogin(txtLogin.getText());
+        usu.cadastrarUsuario();
+        
+    ResultSet tabela;
+    tabela = null;
+    
+    tabela = usu.consultar();
+    DefaultTableModel modelo = (DefaultTableModel) jTblUsuarios.getModel();
+    modelo.setNumRows(0);
+    try
+    {
+        do{
+            modelo.addRow(new String[]{tabela.getString(1), tabela.getString(2), tabela.getString(3), tabela.getString(4), tabela.getString(5)});
+        }
+     while(tabela.next());
+    }catch(SQLException erro)
+            {
+            JOptionPane.showMessageDialog(null, "Erro ao preencher tabela"+ erro) ;    
+             }
