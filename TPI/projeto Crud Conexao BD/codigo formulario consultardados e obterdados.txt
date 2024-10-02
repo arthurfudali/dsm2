@@ -1,0 +1,24 @@
+  public void consultardados(){
+               //MOSTRAR OS DADOS NA TABELA
+        ResultSet tabela;
+        tabela = null;
+        
+        //CHAMAR O MÉTODO CONSULTAR
+        tabela = usu.consultar();
+
+        DefaultTableModel modelo = (DefaultTableModel) jtbDadosUsuario.getModel();
+        modelo.setNumRows(0);
+
+        try{
+            do{
+                modelo.addRow(new String[] {tabela.getString(1),tabela.getString(2), tabela.getString(3),tabela.getString(4),tabela.getString(5) });
+            }
+            while(tabela.next());
+        }
+        catch(SQLException erro){
+            JOptionPane.showMessageDialog(null,"Erro preencher tabela" + erro);
+
+        }
+        }
+        
+       

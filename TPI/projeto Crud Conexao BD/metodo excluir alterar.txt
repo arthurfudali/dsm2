@@ -1,0 +1,13 @@
+ public void excluir(){
+        String sql;
+        sql= "Delete from usuario where codigo="+ getCodigo();
+        con.executeSQL(sql);
+        JOptionPane.showMessageDialog(null, "Registro excluido com sucesso...");
+    }
+    public void alterar(){
+        String sql;
+        sql="Update usuario set nome='"+ getNome()+"',telefone='"+getTelefone()+"' where codigo="+ getCodigo();
+        con.executeSQL(sql);
+        JOptionPane.showMessageDialog(null, "Registro alterado com sucesso...");
+        
+    }

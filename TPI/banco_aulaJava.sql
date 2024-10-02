@@ -28,6 +28,7 @@ select * from produtos;
 
 create database javaCrud;
 use javaCrud;
+use aula_java;
 create table usuario(
 	id int primary key auto_increment,
     codigo int(4) not null,
@@ -36,3 +37,18 @@ create table usuario(
     login varchar(60),
     senha varchar(50)
 );
+
+create table Produto( #codigo, nomeProduto e Descrição
+	id int primary key auto_increment,
+    codigo int(4) not null,
+    nomeProduto varchar(100),
+    descricao varchar(500)
+);
+
+create table vendas(
+	id int primary key auto_increment,
+    codigo int(4) not null,
+    nomeVendedor varchar(100),
+    nomeProduto varchar(100)
+);
+select * from vendas;
