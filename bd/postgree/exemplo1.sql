@@ -79,6 +79,23 @@ create trigger triggerBaixaEstoque
 
 drop trigger triggerBaixaEstoque on emprestimos;
 
+create function registraDevolucao() returns trigger as $$
+	declare novoestoque int;
+	begin
+		select estoque into novoestoque from livros where livro_id = new.livro_id;
+		update livros set estoque = (estoque + 1)
+		where livro_id = new.livro_id;
+		return new;
+	end;
+$$ language plpgsql;
+
+create trigger devolucao
+	after update of devolvido on emprestimos
+	for each row
+	when (new.devolvido = true)
+	execute function registraDevolucao();
+
+
 
 
 select * from emprestimos;
