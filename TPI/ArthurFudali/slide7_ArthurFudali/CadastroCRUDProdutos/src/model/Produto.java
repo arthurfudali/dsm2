@@ -54,7 +54,7 @@ public class Produto {
     }
 
     public void cadastrar() {
-        String sql = "INSERT INTO Produto(codigo, nome, telefone, email) VALUES"
+        String sql = "INSERT INTO Produto(codigo, nomeProduto, descricao) VALUES"
                 + "(" + getCodigo() + ", '" + getNomeProduto() + "', '" + getDescricao() + "') ";
         con.executeSQL(sql);
         JOptionPane.showMessageDialog(null, "Registro salvo com sucesso");
