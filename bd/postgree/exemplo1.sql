@@ -60,6 +60,51 @@ for each row
 when (new.devolvido=true)
 execute function gerarMulta();
 
+create function registraEmprestimo() returns trigger as $$
+	declare novoestoque int;
+	begin
+		select estoque into novoestoque from livros where livro_id = new.livro_id;
+		update livros set estoque = (estoque - 1)
+		where livro_id = new.livro_id;
+		return new;
+	end;
+$$ language plpgsql;
+drop function registraEmprestimo();
+
+create trigger triggerBaixaEstoque
+	after insert on emprestimos
+	for each row
+	when (new.devolvido = false)
+	execute function registraEmprestimo();
+
+drop trigger triggerBaixaEstoque on emprestimos;
+
+create function registraDevolucao() returns trigger as $$
+	declare novoestoque int;
+	begin
+		select estoque into novoestoque from livros where livro_id = new.livro_id;
+		update livros set estoque = (estoque + 1)
+		where livro_id = new.livro_id;
+		return new;
+	end;
+$$ language plpgsql;
+
+create trigger devolucao
+	after update of devolvido on emprestimos
+	for each row
+	when (new.devolvido = true)
+	execute function registraDevolucao();
+
+
+
+
+select * from emprestimos;
+
+select * from multas;
+
+select * from livros;
+
+
 --VIEW PARA LISTRAR MEMROS COM EMPRESTIMOS EM ATRASO
 create view membrosEmAtraso as
 select m.membro_id, m.nome, e.data_prevista_devolucao
@@ -87,6 +132,10 @@ insert into membros(nome, endereco, email) values
 
 insert into emprestimos (livro_id, membro_id, data_prevista_devolucao) values
 (1,1,'2024-10-08');
+insert into emprestimos (livro_id, membro_id, data_prevista_devolucao) values
+(2,2,'2024-10-08');
+insert into emprestimos (livro_id, membro_id, data_prevista_devolucao) values
+(3,2,'2024-10-08');
 
 select * from livros;
 select * from autores;
