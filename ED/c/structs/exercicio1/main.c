@@ -19,7 +19,7 @@ int main()
     for(int i =0; i<T; i++){
         printf("Digite o título do livro: ");
         scanf("%s", l[i].titulo);
-        fflush(stdin);
+        fflush(stdin); // o fflush limpa o buffer do teclado, tornando ele pronto para receber novos dados já que a linguagem C tem dificuldade em ler Strings.
         printf("Digite o ano da edição: ");
         scanf("%d", &l[i].anoEdicao);
 
@@ -31,7 +31,7 @@ int main()
         printf("Digite o preco: ");
         scanf("%f", &l[i].preco);
     };
-    int tam = (sizeof(l)/sizeof(struct Livro));
+    int tam = (sizeof(l)/sizeof(struct Livro)); // isso pega o tamanho do vetor
     float media = count/tam;
 
     for(int i =0; i<T; i++){
