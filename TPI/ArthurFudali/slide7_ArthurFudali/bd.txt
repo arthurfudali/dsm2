@@ -1,0 +1,10 @@
+create database javaCrud;
+
+use javaCrud;
+
+create table Produto( 
+    id int primary key auto_increment,
+    codigo int(4) not null,
+    nomeProduto varchar(100),
+    descricao varchar(500)
+);
