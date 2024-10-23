@@ -1,7 +1,6 @@
 import express from "express";
 const router = express.Router();
 import filmes from "../models/filmes.js";
-
 router.get("/", (req, res) => {
     filmes.findAll().then((filmes)=>{
         
@@ -13,7 +12,6 @@ router.get("/", (req, res) => {
         console.log(error);
     })
   });
-
 router.post("/filmes/new", (req,res)=>{
     const titulo = req.body.titulo
     const genero = req.body.genero
@@ -40,4 +38,4 @@ router.get("/filmes/delete/:id", (req,res)=>{
         console.log(error);
     })
 })
-  export default router //importante não esquecer
+export default router //importante não esquecer

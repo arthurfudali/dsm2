@@ -103,4 +103,34 @@ public class Usuario {
         JOptionPane.showMessageDialog(null, "Registro alterado com sucesso...");
     }
 
+     public ResultSet consultarCampoEspecifico(){
+        ResultSet tabela;
+        tabela = null;
+    
+        try{
+          String sql="Select * from usuario where nome like '"+ getNome()+"%'";
+          tabela= con.RetornarResultset(sql);                  
+       
+           }
+           catch(Exception sqle){
+                JOptionPane.showMessageDialog(null,"Atenção..."+sqle.getMessage());
+           }
+        return tabela;    
+    }
+     
+
+//método para login
+    public ResultSet logar()
+      {
+          ResultSet tabela;
+          tabela = null;
+
+           String sql = "select * from usuario where login= '" + getLogin() + "' and senha= '" + getSenha() + "' " ;
+            tabela= con.RetornarResultset(sql);  
+            return tabela;
+      }   
+
+
+
+
 }
