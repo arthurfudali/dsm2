@@ -6,6 +6,8 @@
 package view;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Usuario;
 
@@ -161,7 +163,7 @@ public class FrmLogin extends javax.swing.JFrame {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(FLogin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FrmLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnLogarActionPerformed
 
