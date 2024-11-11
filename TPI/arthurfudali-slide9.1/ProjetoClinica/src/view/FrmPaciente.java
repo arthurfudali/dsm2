@@ -156,10 +156,9 @@ public class FrmPaciente extends javax.swing.JFrame {
                     .addComponent(lblSenha1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-                        .addComponent(txtSenha))
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
+                    .addComponent(txtSenha)
                     .addComponent(txtLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
                     .addComponent(txtNome))
                 .addGap(132, 132, 132)
@@ -273,7 +272,7 @@ public class FrmPaciente extends javax.swing.JFrame {
                     .addComponent(btnExcluir)
                     .addComponent(btnAlterar)
                     .addComponent(btnCadastrar))
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
 
         JtblUsuarios.setModel(new javax.swing.table.DefaultTableModel(
