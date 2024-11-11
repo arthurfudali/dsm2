@@ -53,4 +53,26 @@ create table vendas(
     nomeProduto varchar(100)
 );
 select * from vendas;
-create database 
+
+create database projetoClinica;
+use projetoClinica;
+create table usuario(
+	id int primary key auto_increment,
+    codigo int(4) not null,
+    nome varchar(100),
+    telefone varchar(16),
+    login varchar(60),
+    senha varchar(50)
+);
+create table pacientes(
+	id int primary key auto_increment,
+    codigoPaciente int(4) not null,
+    nomePaciente varchar(100),
+    endereco varchar(100),
+    complemento varchar(100),
+    rg varchar(12),
+    cpf varchar(14),
+    dataNasc varchar(10)
+);
+select * from pacientes;
+select * from usuario;
