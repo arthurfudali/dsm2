@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  *
  * @author fatec-dsm2
  */
-public class Paciente {
+public class Usuario {
 
     private Integer codigo;
     private String nome;
@@ -22,10 +22,10 @@ public class Paciente {
     private String senha;
     Conexao con = new Conexao();
 
-    public Paciente() {
+    public Usuario() {
     }
 
-    public Paciente(Integer codigo, String nome, String telefone, String login, String senha) {
+    public Usuario(Integer codigo, String nome, String telefone, String login, String senha) {
         this.codigo = codigo;
         this.nome = nome;
         this.telefone = telefone;
