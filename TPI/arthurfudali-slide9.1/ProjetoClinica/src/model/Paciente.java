@@ -100,8 +100,8 @@ public class Paciente {
     }
     
     public void cadastrarPaciente(){
-        String sql = "Insert into paciente(codigoPaciente, nomePaciente, endereco, complemento, rg, cpf, dataNacs) values"
-                + "(" + this.getCodigo() + ", '" + this.getNome() + ", '" + this.getEndereco() + ", '" + this.getComplemento() + ", '" + this.getRg() + ", '" + this.getCpf() + ", '" + this.getDataNasc()+ "' )";
+        String sql = "Insert into pacientes(codigoPaciente, nomePaciente, endereco, complemento, rg, cpf, dataNasc) values"
+                + "(" + this.getCodigo() + ", '" + this.getNome() + "', '" + this.getEndereco() + "', '" + this.getComplemento() + "', '" + this.getRg() + "', '" + this.getCpf() + "', '" + this.getDataNasc()+ "' )";
         con.executeSQL(sql);
         JOptionPane.showMessageDialog(null, "Registrado com sucesso");
     }
@@ -117,13 +117,13 @@ public class Paciente {
     
     public void excluir() {
         String sql;
-        sql = "Delete from pacientes where codigo=" + getCodigo();
+        sql = "Delete from pacientes where codigoPaciente=" + getCodigo();
         con.executeSQL(sql);
         JOptionPane.showMessageDialog(null, "Registro excluido com sucesso...");
     }
     public void alterar() {
         String sql;
-        sql = "Update pacientes set nomePaciente='" + getNome()+ "',endereco='" + getEndereco()+  "',complemento='" + getComplemento()+  "',rg='" + getRg()+  "',cpf='" + getCpf()+  "',dataNacs='" + getDataNasc()+ "' where codigo=" + getCodigo();
+        sql = "Update pacientes set nomePaciente='" + getNome()+ "',endereco='" + getEndereco()+  "',complemento='" + getComplemento()+  "',rg='" + getRg()+  "',cpf='" + getCpf()+  "',dataNasc='" + getDataNasc()+ "' where codigoPaciente=" + getCodigo();
         con.executeSQL(sql);
         JOptionPane.showMessageDialog(null, "Registro alterado com sucesso...");
     }

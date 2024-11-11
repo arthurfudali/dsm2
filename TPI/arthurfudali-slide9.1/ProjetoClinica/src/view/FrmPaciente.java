@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.Paciente;
 import model.Usuario;
 
 /**
@@ -20,20 +21,20 @@ public class FrmPaciente extends javax.swing.JFrame {
     /**
      * Creates new form FrmUsuario
      */
-    Usuario usu = new Usuario();
+    Paciente pac = new Paciente();
     //código formulário usuário
       public void ObterDados(){
       
        ResultSet tabela;
        tabela = null;
     
-       tabela = usu.consultarCampoEspecifico();
-       DefaultTableModel modelo = (DefaultTableModel) JtblUsuarios.getModel();
+       tabela = pac.consultarCampoEspecifico();
+       DefaultTableModel modelo = (DefaultTableModel) jtblPacientes.getModel();
        modelo.setNumRows(0);
        try
        {
         do{
-            modelo.addRow(new String[]{tabela.getString(2), tabela.getString(3), tabela.getString(4), tabela.getString(5), tabela.getString(6)});
+            modelo.addRow(new String[]{tabela.getString(2), tabela.getString(3), tabela.getString(4), tabela.getString(5), tabela.getString(6), tabela.getString(7), tabela.getString(8)});
           }
         while(tabela.next());
         }
@@ -48,12 +49,12 @@ public class FrmPaciente extends javax.swing.JFrame {
         ResultSet tabela;
         tabela = null;
 
-        tabela = usu.consultar();
-        DefaultTableModel modelo = (DefaultTableModel) JtblUsuarios.getModel();
+        tabela = pac.consultarPaciente();
+        DefaultTableModel modelo = (DefaultTableModel) jtblPacientes.getModel();
         modelo.setNumRows(0);
         try {
             do {
-                modelo.addRow(new String[]{tabela.getString(2), tabela.getString(3), tabela.getString(4), tabela.getString(5), tabela.getString(6)});
+                modelo.addRow(new String[]{tabela.getString(2), tabela.getString(3), tabela.getString(4), tabela.getString(5), tabela.getString(6), tabela.getString(7), tabela.getString(8)});
             } while (tabela.next());
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro ao preencher tabela" + erro);
@@ -76,18 +77,22 @@ public class FrmPaciente extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtCodigo = new javax.swing.JTextField();
+        txtCodigoPaciente = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtNome = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        txtTelefone = new javax.swing.JFormattedTextField();
-        lblSenha = new javax.swing.JLabel();
-        txtSenha = new javax.swing.JPasswordField();
-        lblSenha1 = new javax.swing.JLabel();
-        txtLogin = new javax.swing.JTextField();
+        txtComplementoPaciente = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txt_pesquisar = new javax.swing.JTextField();
+        txt_pesquisarUsuario = new javax.swing.JTextField();
         btn_pesquisar = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        txtNomePaciente = new javax.swing.JTextField();
+        txtEnderecoPaciente = new javax.swing.JTextField();
+        txtRgPaciente = new javax.swing.JFormattedTextField();
+        txtCpfPaciente = new javax.swing.JFormattedTextField();
+        txtDataPaciente = new javax.swing.JFormattedTextField();
         jPanel2 = new javax.swing.JPanel();
         btnCadastrar = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
@@ -95,44 +100,31 @@ public class FrmPaciente extends javax.swing.JFrame {
         btnLimpar = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        JtblUsuarios = new javax.swing.JTable();
+        jtblPacientes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(0, 153, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados Usuário"));
+        jPanel1.setForeground(new java.awt.Color(102, 102, 102));
 
         jLabel1.setText("Código:");
         jLabel1.setToolTipText("");
 
-        txtCodigo.addActionListener(new java.awt.event.ActionListener() {
+        txtCodigoPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCodigoActionPerformed(evt);
+                txtCodigoPacienteActionPerformed(evt);
             }
         });
 
         jLabel2.setText("Nome:");
         jLabel2.setToolTipText("");
 
-        txtNome.addActionListener(new java.awt.event.ActionListener() {
+        txtComplementoPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNomeActionPerformed(evt);
+                txtComplementoPacienteActionPerformed(evt);
             }
         });
-
-        jLabel3.setText("Telefone:");
-        jLabel3.setToolTipText("");
-
-        try {
-            txtTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
-        lblSenha.setText("Senha:");
-        lblSenha.setToolTipText("");
-
-        lblSenha1.setText("Login:");
-        lblSenha1.setToolTipText("");
 
         jLabel4.setText("Buscar");
 
@@ -143,31 +135,91 @@ public class FrmPaciente extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setText("Endereco:");
+        jLabel5.setToolTipText("");
+
+        jLabel6.setText("Complemento:");
+        jLabel6.setToolTipText("");
+
+        jLabel7.setText("RG:");
+        jLabel7.setToolTipText("");
+
+        jLabel8.setText("CPF:");
+        jLabel8.setToolTipText("");
+
+        jLabel9.setText("Data de nascimento:");
+        jLabel9.setToolTipText("");
+
+        txtNomePaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNomePacienteActionPerformed(evt);
+            }
+        });
+
+        txtEnderecoPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEnderecoPacienteActionPerformed(evt);
+            }
+        });
+
+        try {
+            txtRgPaciente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###-#")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            txtCpfPaciente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#########/##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            txtDataPaciente.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(lblSenha)
-                    .addComponent(lblSenha1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
-                    .addComponent(txtSenha)
-                    .addComponent(txtLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
-                    .addComponent(txtNome))
-                .addGap(132, 132, 132)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel5))
+                        .addGap(2, 2, 2)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtEnderecoPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_pesquisar))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtCodigoPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(333, 333, 333)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txt_pesquisarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNomePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtComplementoPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txt_pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btn_pesquisar))
+                        .addComponent(txtDataPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(8, 8, 8)
+                        .addComponent(txtRgPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCpfPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -175,31 +227,37 @@ public class FrmPaciente extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCodigoPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(txt_pesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_pesquisarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNomePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel5)
+                            .addComponent(txtEnderecoPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(btn_pesquisar)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSenha)
-                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel6)
+                    .addComponent(txtComplementoPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSenha1)
-                    .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 48, Short.MAX_VALUE))
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8)
+                    .addComponent(txtRgPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCpfPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(txtDataPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 92, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -272,26 +330,26 @@ public class FrmPaciente extends javax.swing.JFrame {
                     .addComponent(btnExcluir)
                     .addComponent(btnAlterar)
                     .addComponent(btnCadastrar))
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
-        JtblUsuarios.setModel(new javax.swing.table.DefaultTableModel(
+        jtblPacientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Código", "Nome", "Telefone", "Login", "Senha"
+                "Código", "Nome", "Endereco", "Complemento", "RG", "CPF", "Data Nascimento"
             }
         ));
-        JtblUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+        jtblPacientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                JtblUsuariosMouseClicked(evt);
+                jtblPacientesMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(JtblUsuarios);
+        jScrollPane1.setViewportView(jtblPacientes);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -311,44 +369,51 @@ public class FrmPaciente extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(27, 27, 27)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel1.getAccessibleContext().setAccessibleName("Dados do Paciente");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
+    private void txtCodigoPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoPacienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCodigoActionPerformed
+    }//GEN-LAST:event_txtCodigoPacienteActionPerformed
 
-    private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
+    private void txtComplementoPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtComplementoPacienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNomeActionPerformed
+    }//GEN-LAST:event_txtComplementoPacienteActionPerformed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         // TODO add your handling code here:
-        txtTelefone.setText("");
-        txtCodigo.setText("");
-        txtLogin.setText("");
-        txtSenha.setText("");
-        txtNome.setText("");
+        txtCodigoPaciente.setText("");
+        txtComplementoPaciente.setText("");
+        txtCpfPaciente.setText("");
+        txtDataPaciente.setText("");
+        txtEnderecoPaciente.setText("");
+        txtNomePaciente.setText("");
+        txtRgPaciente.setText("");
+        
 
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // TODO add your handling code here:
-        usu.setCodigo(Integer.parseInt(txtCodigo.getText()));
-        usu.setNome(txtNome.getText());
-        usu.setTelefone(txtTelefone.getText());
-        usu.setSenha(txtSenha.getText());
-        usu.setLogin(txtLogin.getText());
-        usu.cadastrarUsuario();
+        pac.setCodigo(Integer.parseInt(txtCodigoPaciente.getText()));
+        pac.setNome(txtNomePaciente.getText());
+        pac.setEndereco(txtEnderecoPaciente.getText());
+        pac.setComplemento(txtComplementoPaciente.getText());
+        pac.setRg(txtRgPaciente.getText());
+        pac.setCpf(txtCpfPaciente.getText());
+        pac.setDataNasc(txtDataPaciente.getText());
+        pac.cadastrarPaciente();
         consultar();
 
 
@@ -356,19 +421,22 @@ public class FrmPaciente extends javax.swing.JFrame {
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         // TODO add your handling code here:
-        usu.setCodigo(Integer.parseInt(txtCodigo.getText()));
-        usu.setNome(txtNome.getText());
-        usu.setTelefone(txtTelefone.getText());
-        usu.setSenha(txtSenha.getText());
-        usu.setLogin(txtLogin.getText());
-        usu.alterar();
+        pac.setCodigo(Integer.parseInt(txtCodigoPaciente.getText()));
+        pac.setNome(txtNomePaciente.getText());
+        pac.setEndereco(txtEnderecoPaciente.getText());
+        pac.setComplemento(txtComplementoPaciente.getText());
+        pac.setRg(txtRgPaciente.getText());
+        pac.setCpf(txtCpfPaciente.getText());
+        pac.setDataNasc(txtDataPaciente.getText());
+        pac.alterar();
+        
         consultar();
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
-        usu.setCodigo(Integer.parseInt(txtCodigo.getText()));
-        usu.excluir();
+        pac.setCodigo(Integer.parseInt(txtCodigoPaciente.getText()));
+        pac.excluir();
         consultar();
     }//GEN-LAST:event_btnExcluirActionPerformed
 
@@ -377,25 +445,35 @@ public class FrmPaciente extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnSairActionPerformed
 
-    private void JtblUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JtblUsuariosMouseClicked
+    private void jtblPacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblPacientesMouseClicked
         // TODO add your handling code here:
         //para pegar o numero da linha selecionada na tabela  
-        int linhaSelecionada = JtblUsuarios.getSelectedRow();
+        int linhaSelecionada = jtblPacientes.getSelectedRow();
 
         //mostra as informações da linha selecionada na tabela na caixa de texto
-        txtCodigo.setText(JtblUsuarios.getValueAt(linhaSelecionada, 0).toString());
-        txtNome.setText(JtblUsuarios.getValueAt(linhaSelecionada, 1).toString());
-        txtTelefone.setText(JtblUsuarios.getValueAt(linhaSelecionada, 2).toString());
-        txtSenha.setText(JtblUsuarios.getValueAt(linhaSelecionada, 3).toString());
-        txtLogin.setText(JtblUsuarios.getValueAt(linhaSelecionada, 4).toString());
-    }//GEN-LAST:event_JtblUsuariosMouseClicked
+        txtCodigoPaciente.setText(jtblPacientes.getValueAt(linhaSelecionada, 0).toString());
+        txtNomePaciente.setText(jtblPacientes.getValueAt(linhaSelecionada, 1).toString());
+        txtEnderecoPaciente.setText(jtblPacientes.getValueAt(linhaSelecionada, 2).toString());
+        txtComplementoPaciente.setText(jtblPacientes.getValueAt(linhaSelecionada, 3).toString());
+        txtRgPaciente.setText(jtblPacientes.getValueAt(linhaSelecionada, 4).toString());
+        txtCpfPaciente.setText(jtblPacientes.getValueAt(linhaSelecionada, 5).toString());
+        txtDataPaciente.setText(jtblPacientes.getValueAt(linhaSelecionada, 6).toString());
+    }//GEN-LAST:event_jtblPacientesMouseClicked
 
     private void btn_pesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pesquisarActionPerformed
         // TODO add your handling code here:
-        usu.setNome(txt_pesquisar.getText());
-        usu.consultarCampoEspecifico();
+        pac.setNome(txt_pesquisarUsuario.getText());
+        pac.consultarCampoEspecifico();
         ObterDados();
     }//GEN-LAST:event_btn_pesquisarActionPerformed
+
+    private void txtNomePacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomePacienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNomePacienteActionPerformed
+
+    private void txtEnderecoPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEnderecoPacienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEnderecoPacienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -440,7 +518,6 @@ public class FrmPaciente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable JtblUsuarios;
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnExcluir;
@@ -449,18 +526,23 @@ public class FrmPaciente extends javax.swing.JFrame {
     private javax.swing.JButton btn_pesquisar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblSenha;
-    private javax.swing.JLabel lblSenha1;
-    private javax.swing.JTextField txtCodigo;
-    private javax.swing.JTextField txtLogin;
-    private javax.swing.JTextField txtNome;
-    private javax.swing.JPasswordField txtSenha;
-    private javax.swing.JFormattedTextField txtTelefone;
-    private javax.swing.JTextField txt_pesquisar;
+    private javax.swing.JTable jtblPacientes;
+    private javax.swing.JTextField txtCodigoPaciente;
+    private javax.swing.JTextField txtComplementoPaciente;
+    private javax.swing.JFormattedTextField txtCpfPaciente;
+    private javax.swing.JFormattedTextField txtDataPaciente;
+    private javax.swing.JTextField txtEnderecoPaciente;
+    private javax.swing.JTextField txtNomePaciente;
+    private javax.swing.JFormattedTextField txtRgPaciente;
+    private javax.swing.JTextField txt_pesquisarUsuario;
     // End of variables declaration//GEN-END:variables
 }
