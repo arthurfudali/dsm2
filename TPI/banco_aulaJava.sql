@@ -76,3 +76,17 @@ create table pacientes(
 );
 select * from pacientes;
 select * from usuario;
+
+create database crudfilmes;
+use crudfilmes;
+create table filmes(
+id int primary key auto_increment,
+codigo int,
+titulo varchar(100),
+genero varchar(50),
+diretor varchar(100),
+produtora varchar(50),
+dataCompra varchar(10)
+);
+
+drop table filmes;
